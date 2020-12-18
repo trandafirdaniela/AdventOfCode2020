@@ -1,0 +1,127 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+vector<vector<long long>> rez;
+vector<long long> ticket;
+long long n,pos, first, second,idx,out;
+string s,f,num;
+vector<pair<string, vector<pair<long long, long long>>>> field;
+vector<string> v;
+
+ifstream fin("in.txt");
+ofstream fout("out.txt");
+
+
+int main()
+{
+    
+    while (getline(fin, s))
+    {
+    v.push_back(s);
+     }
+
+int tip = 0;
+for (auto s : v) 
+{
+    if (s == "") 
+    {
+        tip++; continue;
+    }
+
+    if (tip == 0) 
+    {
+         pos = s.find(":");
+         f = s.substr(0, pos);
+         pos = s.find("-");
+         field.push_back({ f, vector<pair<long long, long long>>()});
+        idx = field.size() - 1;
+
+        for (int i = pos - 1; i >= 0 &&( s[i] != ' '); i--) 
+        {
+            num += s[i];
+        }
+        reverse(num.begin(), num.end());
+        first = stoi(num);
+        num = "";
+        for (int i = pos + 1; i < s.size() && s[i] != ' '; i++)
+        {
+            num += s[i];
+        }
+
+        second = stoi(num);
+        num = "";
+        field[int(idx)].second.push_back({ first, second });
+
+        pos = s.find("-", pos + 1);
+        for (int i = pos - 1; i >= 0 && (s[i] != ' '); i--)
+        {
+            num += s[i];
+        }
+        reverse(num.begin(), num.end());
+        first = stoi(num);
+        num = "";
+
+        for (int i = pos + 1; i < s.size() && (s[i] != ' '); i++) 
+        {
+            num += s[i];
+        }
+
+        second = stoi(num);
+        num = "";
+        field[idx].second.push_back({ first, second });
+
+    }
+     if (tip == 1) {
+        if (s == "your ticket:")
+            continue;
+        n = field.size();
+       
+        for (int i = 0; i < s.size(); i++) 
+        {
+            num = "";
+            while (i < s.size() && s[i] != ',')
+                num += s[i++];
+            ticket.push_back(stoi(num));
+        }
+    }
+    if (tip == 2)
+    {
+        if (s == "nearby tickets:")
+            continue;
+        vector<long long> nearby;
+        for (int i = 0; i < s.size(); i++) 
+        {
+            num = "";
+            while (i < s.size() && s[i] != ',')
+                num += s[i++];
+            nearby.push_back(stoi(num));
+        }
+        rez.push_back(nearby);
+    }
+}
+
+for (auto nearby : rez) {
+    for (int i = 0; i < n; i++) {
+        bool ok = false;
+        for (int j = 0; j < n; j++) {
+            for (auto range : field[j].second) {
+                if (range.first <= nearby[i] && range.second >= nearby[i]) {
+                    ok = true;
+                }
+            }
+        }
+        if (!ok) 
+            out += nearby[i];
+    }
+}
+
+cout << out;
+
+return 0;
+
+    
+}
