@@ -18,7 +18,7 @@ long long expresie(string& _s)
 
 	while (_s[0] == '*')
 	{
-			_s.erase(_s.begin(), _s.begin() + 2); // remove the sign and the space after
+			_s.erase(_s.begin(), _s.begin() + 2); 
 			rez *= advancedMath(_s);
 		
 	}
@@ -34,13 +34,12 @@ long long fact(string& _s)
 	}
 	else if (_s[0] == '(')
 	{
-		_s.erase(_s.begin(), _s.begin() + 1); // remove the open bracket
+		_s.erase(_s.begin(), _s.begin() + 1); 
 		long long rez = expresie(_s);
-		_s.erase(_s.begin(), _s.begin() + 1); // remove the closed bracket and the space after
-
+		_s.erase(_s.begin(), _s.begin() + 1); 
 		if (_s[0] == ' ')
 		{
-			_s.erase(_s.begin(), _s.begin() + 1); // remove the space after the closed bracket (if exists)
+			_s.erase(_s.begin(), _s.begin() + 1); 
 		}
 
 		return rez;
@@ -52,7 +51,7 @@ long long advancedMath(string& _s)
 
 	while (_s[0] == '+')
 	{
-		_s.erase(_s.begin(), _s.begin() + 2); // remove the sign and the space after
+		_s.erase(_s.begin(), _s.begin() + 2); 
 		rez += fact(_s);
 	}
 	return rez;
@@ -63,12 +62,12 @@ long long numar(string& _s)
 	while (_s[0] >= '0' && _s[0] <= '9')
 	{
 		number = number * 10 + (_s[0] - '0');
-		_s.erase(_s.begin(), _s.begin() + 1); // remove the digit
+		_s.erase(_s.begin(), _s.begin() + 1); 
 	}
 
 	if (_s[0] == ' ')
 	{
-		_s.erase(_s.begin(), _s.begin() + 1); // remove the space after the number (if exists)
+		_s.erase(_s.begin(), _s.begin() + 1); 
 	}
 
 	return number;
