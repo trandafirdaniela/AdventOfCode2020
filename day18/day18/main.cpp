@@ -76,8 +76,6 @@ long long sum;
 
 int main()
 {
-
-
 	string s;
 	while (getline(fin, s))
 	{

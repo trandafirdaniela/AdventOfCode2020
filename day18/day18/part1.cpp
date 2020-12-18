@@ -73,8 +73,6 @@
 //
 //int main()
 //{
-//
-//
 //	string s;
 //	while (getline(fin, s))
 //	{
