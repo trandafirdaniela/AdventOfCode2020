@@ -78,5 +78,5 @@ int main()
         }
     }
     //enter rez
-    cout << val << '\n';
+    cout << val ;
 }
